@@ -51,6 +51,7 @@ export const Home = (props) => {
                                   price={pizza.price}
                                   category={pizza.category}
                                   rating={pizza.rating}
+                                  key={pizza.id}
                               />
                           ))}
                 </div>

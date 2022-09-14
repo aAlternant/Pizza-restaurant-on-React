@@ -2,6 +2,7 @@ import './main.scss';
 import { Home } from './pages/Home/Home';
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Cart } from './pages/Cart/Cart';
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="cart" element={<Cart />} />
                     </Routes>
                 </BrowserRouter>
             </div>
