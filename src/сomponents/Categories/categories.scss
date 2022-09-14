@@ -1,0 +1,37 @@
+.pizza-categories {
+    display: flex;
+
+    &__item {
+        background: #f9f9f9;
+        border-radius: 30px;
+
+        padding: 10px 20px;
+        margin-right: 9px;
+
+        cursor: pointer;
+
+        color: black;
+        font-weight: 700;
+        font-size: 16px;
+
+        transition: background 0.2s linear, color 0.2s linear;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            background: #282828;
+
+            color: white;
+        }
+    }
+}
+
+.pizza-categories__item {
+    &.active {
+        background: #282828;
+
+        color: white;
+    }
+}

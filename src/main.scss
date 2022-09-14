@@ -1,0 +1,146 @@
+// Basic
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+// Fonts
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+
+// Wrapper
+
+body {
+    background: #ffdf8c;
+    padding: 43px 0;
+}
+
+.wrapper {
+    width: 90%;
+    height: auto;
+    background-color: white;
+    border-radius: 25px;
+
+    padding: 0 50px;
+    margin: 0 auto;
+}
+
+// Header
+
+.header {
+    height: 140px;
+    width: 100%;
+
+    border-bottom: 1px solid #f7f7f7;
+    padding: 50px 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    &__info {
+        display: flex;
+        position: relative;
+
+        &-img {
+            height: 38px;
+            width: 38px;
+            position: absolute;
+            left: 25px;
+            top: 3px;
+        }
+
+        &-context {
+            margin-left: 80px;
+        }
+
+        &-title {
+            font-weight: 800;
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        &-text {
+            font-weight: 400;
+            font-size: 16px;
+            color: #7b7b7b;
+        }
+    }
+
+    &__cart {
+        background: #fe5f1e;
+        border-radius: 30px;
+        width: 150px;
+        height: 50px;
+
+        color: white;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        padding: 15px 23px;
+
+        &-sum {
+            padding-right: 10px;
+            border-right: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        &-count {
+            display: inherit;
+        }
+
+        &-img {
+            margin-right: 7px;
+        }
+    }
+}
+
+/* Navigator */
+
+.navigator {
+    display: flex;
+    margin-top: 40px;
+
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+}
+
+/* Items */
+
+.items-block {
+    margin-top: 30px;
+
+    &__header {
+        font-weight: 700;
+        font-size: 32px;
+        margin-bottom: 35px;
+    }
+
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+
+        // justify-content: space-around;
+    }
+}
