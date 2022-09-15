@@ -1,7 +1,24 @@
 import './pizza.scss';
 
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../redux/slices/cart';
+
 export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rating }) => {
     const typesDictionary = ['тонкое', 'традиционное'];
+
+    const dispatch = useDispatch();
+    const addCartItem = (obj) => dispatch(addItem(obj));
+
+    const handleSubmit = () => {
+        addCartItem({
+            id,
+            imageUrl,
+            title,
+            types,
+            sizes,
+            price,
+        });
+    };
 
     return (
         <div className="items-block__pizza">
@@ -37,7 +54,11 @@ export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rati
                     <div className="items-block__pizza-footer__button-img">
                         <i class="fa-solid fa-plus"></i>
                     </div>
-                    <span className="items-block__pizza-footer__button-text">Добавить</span>
+                    <span
+                        className="items-block__pizza-footer__button-text"
+                        onClick={() => handleSubmit()}>
+                        Добавить
+                    </span>
                     <span className="items-block__pizza-footer__button-dot" />
                     <span className="items-block__pizza-footer__button-count">2</span>
                 </button>

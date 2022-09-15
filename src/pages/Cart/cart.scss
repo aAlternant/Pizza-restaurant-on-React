@@ -118,4 +118,68 @@
             }
         }
     }
+
+    &__total {
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 40px;
+
+        font-weight: 400;
+        font-size: 22px;
+
+        span {
+            margin-right: 8px;
+        }
+
+        &__price-value {
+            color: #fe5f1e;
+        }
+    }
+
+    &__buttons-block {
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 40px;
+
+        &__button {
+            padding: 10px 30px;
+
+            border-radius: 30px;
+            text-align: center;
+
+            cursor: pointer;
+
+            &--back {
+                font-weight: 400;
+                font-size: 16px;
+
+                position: relative;
+
+                color: #cacaca;
+                background: #ffffff;
+
+                border: 1px solid #d3d3d3;
+
+                .fa-angle-left {
+                    position: absolute;
+
+                    left: 15px;
+                    top: 15px;
+                }
+
+                &:hover {
+                    .fa-angle-left {
+                        transform: translateX(-5px);
+                    }
+                }
+            }
+
+            &--pay {
+                background: #fe5f1e;
+                color: white;
+            }
+        }
+    }
 }
