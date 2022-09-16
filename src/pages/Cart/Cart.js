@@ -31,6 +31,7 @@ export const Cart = () => {
                             size={pizza.size}
                             price={pizza.price}
                             key={pizza.id}
+                            amount={pizza.amount}
                         />
                     ))}
                 </div>
