@@ -16,13 +16,20 @@ export const Home = () => {
     const [loading, setLoading] = React.useState(true);
 
     const getData = async () => {
-        const { data } = await axios.get('https://api.jsonbin.io/v3/b/6321da05a1610e63862ad855', {
-            headers: {
-                'X-Master-Key': accessToken,
-            },
-        });
-        setItemsList(data.record);
-        setLoading(false);
+        try {
+            const { data } = await axios.get(
+                'https://api.jsonbin.io/v3/b/6321da05a1610e63862ad855',
+                {
+                    headers: {
+                        'X-Master-Key': accessToken,
+                    },
+                },
+            );
+            setItemsList(data.record);
+            setLoading(false);
+        } catch (error) {
+            alert('Возникла ошибка! Просим позвонить нам!');
+        }
     };
 
     const onClickCategories = (index) => {
