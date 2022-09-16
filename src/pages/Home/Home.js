@@ -6,12 +6,13 @@ import React from 'react';
 import { Sort } from '../../сomponents/Sort/Sort';
 import { Skeleton } from '../../сomponents/Skeleton';
 
-export const Home = (props) => {
+export const Home = () => {
     // pizzaList = pizzaList.parse();
 
     let accessToken = '$2b$10$uBj438wgU4RcspxBgVwlzOxFdHwpbO.I.ZIcT58Su5fGWUO9Y1UQi';
 
     const [itemsList, setItemsList] = React.useState([]);
+    const [categoryItems, setCategoryItems] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
     const getData = async () => {
@@ -24,6 +25,13 @@ export const Home = (props) => {
         setLoading(false);
     };
 
+    const onClickCategories = (index) => {
+        let filteredItemsList = itemsList.filter((pizza) =>
+            index === 0 ? pizza : pizza.category === index,
+        );
+        setCategoryItems(filteredItemsList);
+    };
+
     React.useEffect(() => {
         getData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,7 +40,7 @@ export const Home = (props) => {
     return (
         <>
             <section className="navigator">
-                <Categories />
+                <Categories onClickSubmit={onClickCategories} />
                 <Sort />
             </section>
 
@@ -41,7 +49,7 @@ export const Home = (props) => {
                 <div className="items-block__inner">
                     {loading
                         ? [...Array(12)].map(() => <Skeleton />)
-                        : itemsList.map((pizza) => (
+                        : (categoryItems.length > 0 ? categoryItems : itemsList).map((pizza) => (
                               <Pizza
                                   id={pizza.id}
                                   title={pizza.title}

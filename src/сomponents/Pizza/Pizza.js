@@ -1,10 +1,14 @@
 import './pizza.scss';
 
+import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cart';
 
 export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rating }) => {
     const typesDictionary = ['тонкое', 'традиционное'];
+    const [type, setType] = React.useState(types[0]);
+    const [size, setSize] = React.useState(sizes[0]);
 
     const dispatch = useDispatch();
     const addCartItem = (obj) => dispatch(addItem(obj));
@@ -14,8 +18,8 @@ export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rati
             id,
             imageUrl,
             title,
-            types,
-            sizes,
+            type,
+            size,
             price,
         });
     };
@@ -28,12 +32,13 @@ export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rati
             </div>
             <div className="items-block__pizza-options">
                 <div className="items-block__pizza-options__item">
-                    {types.map((v, index) => (
+                    {types.map((number) => (
                         <span
                             className={`items-block__pizza-options__switch ${
-                                index === 0 ? 'selected' : ''
-                            }`}>
-                            {typesDictionary[v]}
+                                type === number ? 'selected' : ''
+                            }`}
+                            onClick={() => setType(number)}>
+                            {typesDictionary[number]}
                         </span>
                     ))}
                 </div>
@@ -41,8 +46,9 @@ export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rati
                     {sizes.map((value, index) => (
                         <span
                             className={`items-block__pizza-options__switch ${
-                                index === 0 ? 'selected' : ''
-                            }`}>
+                                value === size ? 'selected' : ''
+                            }`}
+                            onClick={() => setSize(value)}>
                             {value} см
                         </span>
                     ))}
