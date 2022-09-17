@@ -186,4 +186,55 @@
             }
         }
     }
+
+    &__empty {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        text-align: center;
+
+        width: 80%;
+        margin: 0 auto;
+
+        &-title {
+            font-weight: 700;
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        &-img {
+            height: 300px;
+            width: 255px;
+        }
+
+        &-text {
+            font-weight: 400;
+            font-size: 18px;
+
+            color: #777777;
+        }
+
+        &-button {
+            padding: 10px 30px;
+
+            font-weight: 700;
+            font-size: 16px;
+
+            color: white;
+            background-color: black;
+
+            border-radius: 30px;
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: background-color 0.2s linear, color 0.2s linear;
+
+            &:hover {
+                color: black;
+                background-color: white;
+            }
+        }
+    }
 }
