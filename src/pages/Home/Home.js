@@ -7,13 +7,13 @@ import { Sort } from '../../сomponents/Sort/Sort';
 import { Skeleton } from '../../сomponents/Skeleton';
 
 export const Home = () => {
-    // pizzaList = pizzaList.parse();
-
     let accessToken = '$2b$10$uBj438wgU4RcspxBgVwlzOxFdHwpbO.I.ZIcT58Su5fGWUO9Y1UQi';
 
     const [itemsList, setItemsList] = React.useState([]);
     const [categoryItems, setCategoryItems] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+
+    // Get pizza by server
 
     const getData = async () => {
         try {
@@ -31,6 +31,8 @@ export const Home = () => {
             alert('Возникла ошибка! Просим позвонить нам!');
         }
     };
+
+    // Filter by category
 
     const onClickCategories = (index) => {
         let filteredItemsList = itemsList.filter((pizza) =>

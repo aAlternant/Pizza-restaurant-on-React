@@ -4,7 +4,11 @@ import React from 'react';
 import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
 import { Cart } from './pages/Cart/Cart';
 
+import { useSelector } from 'react-redux';
+
 function App() {
+    const cartList = useSelector((state) => state.cart.cart);
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -25,12 +29,18 @@ function App() {
                         </Link>
                         <Link to="cart">
                             <div className="header__cart">
-                                <div className="header__cart-sum">530 ₴</div>
+                                <div className="header__cart-sum">
+                                    {cartList.reduce(
+                                        (acum, cur) => acum + cur.price * cur.amount,
+                                        0,
+                                    ) + '  '}
+                                    ₴
+                                </div>
                                 <div className="header__cart-count">
                                     <div className="header__cart-img">
                                         <i className="fa-solid fa-cart-shopping"></i>
                                     </div>
-                                    <span className="header__cart-value">3</span>
+                                    <span className="header__cart-value">{cartList.length}</span>
                                 </div>
                             </div>
                         </Link>

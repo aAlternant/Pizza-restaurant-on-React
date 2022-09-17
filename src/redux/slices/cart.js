@@ -26,19 +26,17 @@ const cartSlice = createSlice({
 
         setAmount(state, action) {
             let data = action.payload;
+            for (let index = 0; index < state.cart.length; index++) {
+                const element = state.cart[index];
 
-            state.cart.forEach((item) => {
-                console.log(item);
-                if (item.id === data.id) {
-                    if (data.plus && item.amount < 5) {
-                        item.amount = item.amount++;
-                    }
-
-                    if (item.amount >= 1) {
-                        item.amount = item.amount++;
-                    }
+                if (element.id === data.id && element.amount < 5 && data.set === 'plus') {
+                    element.amount++;
                 }
-            });
+
+                if (element.id === data.id && element.amount > 1 && data.set === 'minus') {
+                    element.amount--;
+                }
+            }
         },
 
         clearCart(state) {

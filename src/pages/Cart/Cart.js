@@ -2,10 +2,15 @@ import { CartPizza } from '../../сomponents/CartPizza/CartPizza';
 import './cart.scss';
 import { useSelector } from 'react-redux';
 
+import { clearCart } from '../../redux/slices/cart';
+import { useDispatch } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 
 export const Cart = () => {
     const cartItems = useSelector((state) => state.cart.cart);
+
+    const dispatch = useDispatch();
 
     return (
         <div className="cart">
@@ -17,7 +22,11 @@ export const Cart = () => {
                     </div>
                     <div className="cart__header-cleaner">
                         <i className="fa-solid fa-trash"></i>
-                        <span className="cart__header-cleaner-text">Очистить корзину</span>
+                        <span
+                            className="cart__header-cleaner-text"
+                            onClick={() => dispatch(clearCart())}>
+                            Очистить корзину
+                        </span>
                     </div>
                 </div>
 
@@ -44,7 +53,7 @@ export const Cart = () => {
                     <div className="cart__total__price">
                         <span className="cart__total__price-text">Сумма заказа:</span>
                         <b className="cart__total__price-value">
-                            {cartItems.reduce((acum, cur) => acum + cur.price, 0)} ₴
+                            {cartItems.reduce((acum, cur) => acum + cur.price * cur.amount, 0)} ₴
                         </b>
                     </div>
                 </div>
