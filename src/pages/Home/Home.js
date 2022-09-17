@@ -11,7 +11,23 @@ export const Home = () => {
 
     const [itemsList, setItemsList] = React.useState([]);
     const [categoryItems, setCategoryItems] = React.useState([]);
+    const [sortedItems, setSortedItems] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+
+    const [useList, setUseList] = React.useState(0);
+
+    function takeSelectedList() {
+        switch (useList) {
+            case 0:
+                return itemsList;
+            case 1:
+                return categoryItems;
+            case 2:
+                return sortedItems;
+            default:
+                break;
+        }
+    }
 
     // Get pizza by server
 
@@ -26,6 +42,7 @@ export const Home = () => {
                 },
             );
             setItemsList(data.record);
+            setUseList(0);
             setLoading(false);
         } catch (error) {
             alert('Возникла ошибка! Просим позвонить нам!');
@@ -39,6 +56,29 @@ export const Home = () => {
             index === 0 ? pizza : pizza.category === index,
         );
         setCategoryItems(filteredItemsList);
+        setUseList(1);
+    };
+
+    // Sort by selected setting
+
+    const onClickSort = (index) => {
+        switch (index) {
+            case 0:
+                let sortedItemsList = itemsList.sort((a, b) => a.rating > b.rating);
+                setSortedItems(sortedItemsList);
+                break;
+            case 1:
+                sortedItemsList = itemsList.sort((a, b) => a.price > b.price);
+                setSortedItems(sortedItemsList);
+                break;
+            case 2:
+                sortedItemsList = itemsList.sort();
+                setSortedItems(sortedItemsList);
+                break;
+            default:
+                break;
+        }
+        setUseList(2);
     };
 
     React.useEffect(() => {
@@ -49,8 +89,8 @@ export const Home = () => {
     return (
         <>
             <section className="navigator">
-                <Categories onClickSubmit={onClickCategories} />
-                <Sort />
+                <Categories onClick={onClickCategories} />
+                <Sort onClick={onClickSort} />
             </section>
 
             <section className="items-block">
@@ -58,7 +98,7 @@ export const Home = () => {
                 <div className="items-block__inner">
                     {loading
                         ? [...Array(12)].map(() => <Skeleton />)
-                        : (categoryItems.length > 0 ? categoryItems : itemsList).map((pizza) => (
+                        : takeSelectedList().map((pizza) => (
                               <Pizza
                                   id={pizza.id}
                                   title={pizza.title}

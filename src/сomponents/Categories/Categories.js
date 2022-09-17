@@ -1,13 +1,13 @@
 import React from 'react';
 import './categories.scss';
 
-export const Categories = ({ onClickSubmit }) => {
+export const Categories = ({ onClick }) => {
     const [activeIndex, setActiveIndex] = React.useState(0);
 
     const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
     const handleSumbit = (index) => {
-        onClickSubmit(index);
+        onClick(index);
         setActiveIndex(index);
     };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './sort.scss';
 
-export const Sort = () => {
+export const Sort = ({ onClick }) => {
     const [open, setOpen] = React.useState(false);
     const [selected, setSelected] = React.useState(0);
     const sortList = ['популярности', 'цене', 'алфавиту'];
@@ -23,7 +23,10 @@ export const Sort = () => {
                             className={`navigator__sort__popup-text ${
                                 index === selected ? 'selected' : ''
                             }`}
-                            onClick={() => setSelected(index)}>
+                            onClick={() => {
+                                setSelected(index);
+                                onClick(index);
+                            }}>
                             {`по ${sortName}`}
                         </span>
                     ))}
