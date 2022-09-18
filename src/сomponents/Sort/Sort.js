@@ -26,6 +26,7 @@ export const Sort = ({ onClick }) => {
                             onClick={() => {
                                 setSelected(index);
                                 onClick(index);
+                                setOpen(!open);
                             }}>
                             {`по ${sortName}`}
                         </span>

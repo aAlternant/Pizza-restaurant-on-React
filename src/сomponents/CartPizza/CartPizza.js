@@ -21,11 +21,11 @@ export const CartPizza = ({ title, imageUrl, price, type, size, id, amount }) =>
             <div className="cart__order-block__item-options">
                 <i
                     className="fa-solid fa-circle-minus"
-                    onClick={() => dispatch(setAmount({ id, set: 'minus' }))}></i>
+                    onClick={() => dispatch(setAmount({ id, set: 'minus', size, type }))}></i>
                 <b className="cart__order-block__item-options-value">{amount}</b>
                 <i
                     className="fa-solid fa-circle-plus"
-                    onClick={() => dispatch(setAmount({ id, set: 'plus' }))}></i>
+                    onClick={() => dispatch(setAmount({ id, set: 'plus', size, type }))}></i>
             </div>
             <b className="cart__order-block__item-price">{price} ₴</b>
             <i className="fa-solid fa-circle-xmark" onClick={() => dispatch(removeItem(id))}></i>

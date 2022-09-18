@@ -8,15 +8,25 @@ const cartSlice = createSlice({
     reducers: {
         addItem(state, action) {
             let data = action.payload;
-            state.cart.push({
-                id: data.id,
-                imageUrl: data.imageUrl,
-                title: data.title,
-                type: data.type,
-                size: data.size,
-                price: data.price,
-                amount: 1,
-            });
+
+            if (
+                !state.cart.some(
+                    (element) =>
+                        element.id === data.id &&
+                        element.size === data.size &&
+                        element.type === data.type,
+                )
+            ) {
+                state.cart.push({
+                    id: data.id,
+                    imageUrl: data.imageUrl,
+                    title: data.title,
+                    type: data.type,
+                    size: data.size,
+                    price: data.price,
+                    amount: 1,
+                });
+            }
         },
 
         removeItem(state, action) {
@@ -29,11 +39,23 @@ const cartSlice = createSlice({
             for (let index = 0; index < state.cart.length; index++) {
                 const element = state.cart[index];
 
-                if (element.id === data.id && element.amount < 5 && data.set === 'plus') {
+                if (
+                    element.id === data.id &&
+                    element.size === data.size &&
+                    element.type === data.type &&
+                    element.amount < 5 &&
+                    data.set === 'plus'
+                ) {
                     element.amount++;
                 }
 
-                if (element.id === data.id && element.amount > 1 && data.set === 'minus') {
+                if (
+                    element.id === data.id &&
+                    element.size === data.size &&
+                    element.type === data.type &&
+                    element.amount > 1 &&
+                    data.set === 'minus'
+                ) {
                     element.amount--;
                 }
             }

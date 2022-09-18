@@ -16,19 +16,6 @@ export const Home = () => {
 
     const [useList, setUseList] = React.useState(0);
 
-    function takeSelectedList() {
-        switch (useList) {
-            case 0:
-                return itemsList;
-            case 1:
-                return categoryItems;
-            case 2:
-                return sortedItems;
-            default:
-                break;
-        }
-    }
-
     // Get pizza by server
 
     const getData = async () => {
@@ -62,17 +49,18 @@ export const Home = () => {
     // Sort by selected setting
 
     const onClickSort = (index) => {
+        let sortedItemsList = [];
         switch (index) {
             case 0:
-                let sortedItemsList = itemsList.sort((a, b) => a.rating > b.rating);
+                sortedItemsList = itemsList.slice().sort((a, b) => (a.rating > b.rating ? 1 : -1));
                 setSortedItems(sortedItemsList);
                 break;
             case 1:
-                sortedItemsList = itemsList.sort((a, b) => a.price > b.price);
+                sortedItemsList = itemsList.slice().sort((a, b) => (a.price > b.price ? 1 : -1));
                 setSortedItems(sortedItemsList);
                 break;
             case 2:
-                sortedItemsList = itemsList.sort();
+                sortedItemsList = itemsList.slice().sort((a, b) => a.title.localeCompare(b.title));
                 setSortedItems(sortedItemsList);
                 break;
             default:
@@ -80,6 +68,21 @@ export const Home = () => {
         }
         setUseList(2);
     };
+
+    // Current list render
+
+    function takeSelectedList() {
+        switch (useList) {
+            case 0:
+                return itemsList;
+            case 1:
+                return categoryItems;
+            case 2:
+                return sortedItems;
+            default:
+                break;
+        }
+    }
 
     React.useEffect(() => {
         getData();

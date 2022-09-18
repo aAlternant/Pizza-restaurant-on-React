@@ -10,6 +10,8 @@ export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rati
     const [type, setType] = React.useState(types[0]);
     const [size, setSize] = React.useState(sizes[0]);
 
+    const [count, setCount] = React.useState(0);
+
     const dispatch = useDispatch();
     const addCartItem = (obj) => dispatch(addItem(obj));
 
@@ -22,10 +24,11 @@ export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rati
             size,
             price,
         });
+        setCount(count + 1);
     };
 
     return (
-        <div className="items-block__pizza">
+        <div className={`items-block__pizza ${count > 0 && 'items-block__pizza--many'}`}>
             <img className="items-block__pizza-img" src={imageUrl} alt={title} />
             <div className="items-block__pizza-title-outer">
                 <h4 className="items-block__pizza-title">{title}</h4>
@@ -54,19 +57,17 @@ export const Pizza = ({ id, imageUrl, title, types, sizes, price, category, rati
                     ))}
                 </div>
             </div>
-            <div className="items-block__pizza-footer">
+            <div className={`items-block__pizza-footer`}>
                 <div className="items-block__pizza-footer__price">от {price} ₴</div>
-                <button className="items-block__pizza-footer__button">
+                <button
+                    className="items-block__pizza-footer__button"
+                    onClick={() => handleSubmit()}>
                     <div className="items-block__pizza-footer__button-img">
                         <i class="fa-solid fa-plus"></i>
                     </div>
-                    <span
-                        className="items-block__pizza-footer__button-text"
-                        onClick={() => handleSubmit()}>
-                        Добавить
-                    </span>
+                    <span className="items-block__pizza-footer__button-text">Добавить</span>
                     <span className="items-block__pizza-footer__button-dot" />
-                    <span className="items-block__pizza-footer__button-count">2</span>
+                    <span className="items-block__pizza-footer__button-count">{count}</span>
                 </button>
             </div>
         </div>
