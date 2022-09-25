@@ -6,6 +6,12 @@ export const Sort = ({ onClick }) => {
     const [selected, setSelected] = React.useState(0);
     const sortList = ['популярности', 'цене', 'алфавиту'];
 
+    const handleClick = (index) => {
+        setSelected(index);
+        onClick(index);
+        setOpen(!open);
+    };
+
     return (
         <div className="navigator__sort">
             <div
@@ -23,11 +29,7 @@ export const Sort = ({ onClick }) => {
                             className={`navigator__sort__popup-text ${
                                 index === selected ? 'selected' : ''
                             }`}
-                            onClick={() => {
-                                setSelected(index);
-                                onClick(index);
-                                setOpen(!open);
-                            }}>
+                            onClick={() => handleClick(index)}>
                             {`по ${sortName}`}
                         </span>
                     ))}

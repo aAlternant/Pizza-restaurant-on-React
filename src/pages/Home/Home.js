@@ -5,32 +5,26 @@ import React from 'react';
 
 import { Sort } from '../../сomponents/Sort/Sort';
 import { Skeleton } from '../../сomponents/Skeleton';
+import ReactPaginate from 'react-paginate';
 
 export const Home = () => {
-    let accessToken = '$2b$10$uBj438wgU4RcspxBgVwlzOxFdHwpbO.I.ZIcT58Su5fGWUO9Y1UQi';
-
     const [itemsList, setItemsList] = React.useState([]);
     const [categoryItems, setCategoryItems] = React.useState([]);
     const [sortedItems, setSortedItems] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [pageCount, setPageCount] = React.useState(1);
 
     const [useList, setUseList] = React.useState(0);
 
     // Get pizza by server
 
-    const getData = async () => {
+    const getData = async (page = 1) => {
         try {
-            const { data } = await axios.get(
-                'https://api.jsonbin.io/v3/b/6321da05a1610e63862ad855',
-                {
-                    headers: {
-                        'X-Master-Key': accessToken,
-                    },
-                },
-            );
-            setItemsList(data.record);
+            const { data } = await axios.get(`http://localhost:4000/data/pizza?page=${page}`);
+            setItemsList(data.pizza);
             setUseList(0);
             setLoading(false);
+            setPageCount(data.pageCount);
         } catch (error) {
             alert('Возникла ошибка! Просим позвонить нам!');
         }
@@ -52,7 +46,7 @@ export const Home = () => {
         let sortedItemsList = [];
         switch (index) {
             case 0:
-                sortedItemsList = itemsList.slice().sort((a, b) => (a.rating > b.rating ? 1 : -1));
+                sortedItemsList = itemsList.slice();
                 setSortedItems(sortedItemsList);
                 break;
             case 1:
@@ -116,6 +110,22 @@ export const Home = () => {
                           ))}
                 </div>
             </section>
+
+            <div className="pagination__outer">
+                <ReactPaginate
+                    pageClassName="pagination-item"
+                    className="pagination"
+                    previousClassName="pagination-button pagination-button--prev"
+                    nextClassName="pagination-button pagination-button--next"
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={(e) => getData(e.selected + 1)}
+                    pageRangeDisplayed={8}
+                    pageCount={pageCount}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                />
+            </div>
         </>
     );
 };

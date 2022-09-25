@@ -28,6 +28,10 @@ a {
     color: inherit;
 }
 
+ul {
+    padding: 0;
+}
+
 // Fonts
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
@@ -135,6 +139,7 @@ body {
 
 .items-block {
     margin-top: 30px;
+    justify-content: center;
 
     &__header {
         font-weight: 700;
@@ -145,7 +150,56 @@ body {
     &__inner {
         display: flex;
         flex-wrap: wrap;
+    }
+}
 
-        // justify-content: space-around;
+.pagination {
+    &__outer {
+        width: 100%;
+    }
+
+    list-style-type: none;
+    display: flex;
+
+    justify-content: center;
+
+    user-select: none;
+
+    padding-bottom: 30px;
+
+    &-item {
+        text-align: center;
+
+        width: 30px;
+        height: 30px;
+
+        cursor: pointer;
+
+        font-size: 18px;
+        font-weight: 700;
+
+        margin-left: 15px;
+
+        &.selected {
+            background-color: orange;
+            color: white;
+
+            border-radius: 8px;
+        }
+    }
+
+    &-button {
+        text-align: center;
+
+        width: 30px;
+        height: 30px;
+
+        cursor: pointer;
+
+        font-size: 18px;
+        font-weight: 700;
+        &--next {
+            margin-left: 15px;
+        }
     }
 }
