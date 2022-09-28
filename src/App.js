@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
 import { Cart } from './pages/Cart/Cart';
 
 import { useSelector } from 'react-redux';
+import { Login } from './pages/Login/Login';
 
 function App() {
     const cartList = useSelector((state) => state.cart.cart);
@@ -49,6 +50,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="cart" element={<Cart />} />
+                        <Route path="login" element={<Login />} />
                     </Routes>
                 </div>
             </div>

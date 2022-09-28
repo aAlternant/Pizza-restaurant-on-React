@@ -1,6 +1,6 @@
 import { Pizza } from '../../сomponents/Pizza/Pizza';
 import { Categories } from '../../сomponents/Categories/Categories';
-import axios from 'axios';
+import axios from '../../assets/axios';
 import React from 'react';
 
 import { Sort } from '../../сomponents/Sort/Sort';
@@ -20,7 +20,7 @@ export const Home = () => {
 
     const getData = async (page = 1) => {
         try {
-            const { data } = await axios.get(`http://localhost:4000/data/pizza?page=${page}`);
+            const { data } = await axios.get(`/data/pizza?page=${page}`);
             setItemsList(data.pizza);
             setUseList(0);
             setLoading(false);
